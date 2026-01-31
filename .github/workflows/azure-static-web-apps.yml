@@ -20,7 +20,7 @@ jobs:
           submodules: true
           lfs: false
 
-      # [1] 기존 Static Web Apps 배포 (안정성)
+      # [1] 기존 Static Web Apps 배포 (메인 주소용)
       - name: Build And Deploy to SWA
         id: builddeploy
         uses: Azure/static-web-apps-deploy@v1
@@ -30,15 +30,13 @@ jobs:
           action: "upload"
           app_location: "/"
           api_location: ""
-          output_location: "."  # 루트 경로 명시
+          output_location: "."
           skip_app_build: true
           deployment_environment: "production"
 
-      # [2] Storage Account 배포 (즉시성)
+      # [2] Storage Account 배포 (즉시 확인용 백업)
       - name: Deploy to Azure Storage
         uses: azure/CLI@v1
         with:
-          # 스토리지 배포를 위해 Azure 로그인 정보가 필요합니다. 
-          # [주의] 이 단계를 위해 AZURE_CREDENTIALS 설정이 필요할 수 있습니다.
           inlineScript: |
-            az storage blob upload-batch -s ./ -d '$web' --account-name <여기에_스토리지_계정_이름_입력> --auth-mode key --overwrite true
+            az storage blob upload-batch -s ./ -d '$web' --account-name donga2 --auth-mode key --overwrite true
