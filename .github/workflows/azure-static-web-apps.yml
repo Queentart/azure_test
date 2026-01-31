@@ -31,7 +31,7 @@ jobs:
           ###### 정적 파일 배포 최적화 설정 ######
           app_location: "/"           # 소스 코드 위치
           api_location: ""            # API 없음
-          output_location: ""         # 배포할 파일 위치를 빈값으로 두어 루트 그대로 사용
+          output_location: "."         # 배포할 파일 위치를 빈값으로 두어 루트 그대로 사용
           
           # [중요] 순수 HTML 배포 시 빌드 과정을 건너뛰어 배포 시간을 단축합니다.
           skip_app_build: true
